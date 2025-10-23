@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0a0a0a;     /* พื้นหลังดำ */
+  --foreground: #ffffff;     /* ตัวหนังสือหลักขาว */
+  --card: #1f1f1f;           /* พื้นหลังการ์ด */
+  --brand: #f97316;          /* ส้ม */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-brand: var(--brand);
+  --font-sans: var(--font-noto);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-noto), sans-serif;
+}

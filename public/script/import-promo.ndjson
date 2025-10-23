@@ -1,0 +1,15 @@
+{"_type":"promo","_id":"promo-1","id":1,"title":"อยากเปิดอู่ให้สุด ต้องมีครบเซ็ต โปรเดียวครบทุกเครื่อง","slug":{"_type":"slug","current":"promo-1"},"banner":{"_type":"image","asset":{"_type":"reference","_ref":"image-83d4c50f82459af0b8b7801978b0c4110e88fffe-900x750-jpg"}},"desc":"อยากเปิดอู่ให้สุด ต้องมีครบเซ็ต! โปรเดียวจบครบทุกเครื่อง","fulldesc":"ลิฟท์ยกรถคานล่าง 4.5 ตัน\nเครื่องถอดยางล็อคมือ HPX560A\nเครื่องถ่วงยาง HPC 88\nราคา 7x,xxx.-","startsAt":"2025-10-22T00:00:00Z","endsAt":"2026-10-22T00:00:00Z","isActive":true}
+{"_type":"promo","_id":"promo-2","id":2,"title":"ยก ถ่วง ถอด ลิฟท์ดี ถอดไว ถ่วงเป๊ะ ต้อง HIGH PRO จบในโปรเดียว","slug":{"_type":"slug","current":"promo-2"},"banner":{"_type":"image","asset":{"_type":"reference","_ref":"image-618293c75e9be664bee7602ce3e1cf53cb1f1d45-900x750-jpg"}},"desc":"ยก ถ่วง ถอด\nลิฟท์ดี ถอดไว ถ่วงเป๊ะ\nต้อง HIGH PRO จบในโปรเดียว","fulldesc":"ลิฟท์เอ็กซ์ยกรถแบบวางพื้น 3 ตัน\nเครื่องถอดยางล็อคมือ HPX560A\nเครื่องถ่วงยาง HPC 88\nราคา 8x,xxx.-","startsAt":"2025-10-22T00:00:00Z","endsAt":"2026-10-22T00:00:00Z","isActive":true}
+{"_type":"promo","_id":"promo-3","id":3,"title":"เปิดอู่ทั้งที่....ต้องเอา ให้สุด! HIGH PRO มีครบจบทุกเครื่อง","slug":{"_type":"slug","current":"promo-3"},"banner":{"_type":"image","asset":{"_type":"reference","_ref":"image-272a82b78cc370cbce3d91810cb3660614b3ddf5-900x750-jpg"}},"desc":"เปิดอู่ทั้งที่....ต้องเอา ให้สุด!\nHIGH PRO มีครบจบทุกเครื่อง","fulldesc":"ลิฟท์ยกรถคานล่าง 4.5 ตัน\nเครื่องถอดยางล็อคมือ HPX560A\nเครื่องถ่วงยาง HPC 88\nถังดูดถ่ายน้ำมันเครื่อง 70 ลิตร\nราคา 8x,xxx.-","startsAt":"2025-10-22T00:00:00Z","endsAt":"2026-10-22T00:00:00Z","isActive":true}
+{"_type":"promo","_id":"promo-4","id":4,"title":"HIGH PRO จัดให้ งบน้อย ก็สอยได้ อยากเปิดร้านยางไม่ต้องกังวล","slug":{"_type":"slug","current":"promo-4"},"banner":{"_type":"image","asset":{"_type":"reference","_ref":"image-9c046a652701eb0cde86bfdd14dc55f21daf2f95-900x750-jpg"}},"desc":"HIGH PRO จัดให้ งบน้อย ก็สอยได้\nอยากเปิดร้านยางไม่ต้องกังวล","fulldesc":"เครื่องถอดยางล็อคมือ HPX560A\nเครื่องถ่วงยาง HPC 88\nขาตั้งเฟือง 3 ตัน\nแม่แรงตะเข้ 3.5 ตัน\nราคา 4x,xxx.-","startsAt":"2025-10-22T00:00:00Z","endsAt":"2026-10-22T00:00:00Z","isActive":true}
+
+
+//https://cdn.sanity.io/images/6g9o8ej4/production/83d4c50f82459af0b8b7801978b0c4110e88fffe-900x750.jpg
+//https://cdn.sanity.io/images/6g9o8ej4/production/618293c75e9be664bee7602ce3e1cf53cb1f1d45-900x750.jpg
+//https://cdn.sanity.io/images/6g9o8ej4/production/272a82b78cc370cbce3d91810cb3660614b3ddf5-900x750.jpg
+//https://cdn.sanity.io/images/6g9o8ej4/production/9c046a652701eb0cde86bfdd14dc55f21daf2f95-900x750.jpg
+
+//image-83d4c50f82459af0b8b7801978b0c4110e88fffe-900x750-jpg
+//image-618293c75e9be664bee7602ce3e1cf53cb1f1d45-900x750-jpg
+//image-272a82b78cc370cbce3d91810cb3660614b3ddf5-900x750-jpg
+//image-9c046a652701eb0cde86bfdd14dc55f21daf2f95-900x750-jpg
