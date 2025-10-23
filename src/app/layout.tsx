@@ -1,14 +1,15 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Noto_Sans_Thai } from "next/font/google";
+//import { Noto_Sans_Thai } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-const noto = Noto_Sans_Thai({
+/*const noto = Noto_Sans_Thai({
   subsets: ["thai"],
   weight: ["300","400","500","700"],
   variable: "--font-noto",
 });
+*/
 export const metadata: Metadata = {
   title: "HIGH PRO",
   description: "อุปกรณ์ช่างครบ จบที่เดียว",
