@@ -16,7 +16,8 @@ type ContentData= {
   date: string;
 };
 
-const rawContent = await sanity.fetch<ContentData[]>(qContentList);
+
+/*const rawContent = await sanity.fetch<ContentData[]>(qContentList);
 
 const allPosts: Post[] = rawContent
     .filter(p => p.banner) // กรองเฉพาะรายการที่มีรูปภาพ
@@ -35,7 +36,7 @@ const allPosts: Post[] = rawContent
 
 console.log("GROQ qContentListpage >>>\n", qContentList);
 console.log("slug URL ที่ถูกสร้าง:", allPosts[0]?.slug);    
-
+*/
 /*
 const allPosts: Post[] = [
   {
@@ -67,29 +68,59 @@ const allPosts: Post[] = [
   },
 ];
 */
-function filterPosts(q: string, tag: string) {
-  return allPosts.filter(p =>
-    (q ? (p.title + p.excerpt).toLowerCase().includes(q.toLowerCase()) : true) &&
-    (tag ? (p.tag ?? "").toLowerCase() === tag.toLowerCase() : true)
-  );
+function filterPosts(q: string, tag: string, posts: Post[]): Post[] { // 👈 รับ Array เข้ามา
+ return posts.filter(p =>
+  (q ? (p.title + p.excerpt).toLowerCase().includes(q.toLowerCase()) : true) &&
+  (tag ? (p.tag ?? "").toLowerCase() === tag.toLowerCase() : true)
+ );
 }
 
 
-export default function BlogIndex({
-  searchParams,
-}: {
-  searchParams: { q?: string; tag?: string; page?: string };
+export default async function BlogIndex({ 
+    searchParams 
+}: { 
+    searchParams: { [key: string]: string | string[] | undefined } | Promise<{ [key: string]: string | string[] | undefined }> // Type อาจจะเป็น Promise ใน Next.js 15
 }) {
-  const q = searchParams?.q ?? "";
-  const tag = searchParams?.tag ?? "";
-  const page = Math.max(1, parseInt(searchParams?.page ?? "1", 10) || 1);
+    // ต้อง await ก่อนเพื่อเข้าถึงข้อมูลภายใน
+    const resolvedSearchParams = await searchParams; // <--- **บรรทัดสำคัญ**
+
+    // จากนั้นใช้ resolvedSearchParams แทน
+    // แก้ไขการดึง q และ tag ให้ถูกต้องตาม Type
+    const q = (Array.isArray(resolvedSearchParams?.q) ? resolvedSearchParams.q[0] : resolvedSearchParams?.q) ?? "";
+    const tag = (Array.isArray(resolvedSearchParams?.tag) ? resolvedSearchParams.tag[0] : resolvedSearchParams?.tag) ?? "";
+    
+    // บรรทัดที่คุณมีปัญหา:
+    const page = Math.max(
+        1, 
+        parseInt(resolvedSearchParams?.page?.toString() ?? "1", 10) || 1
+    );
 
   const pageSize = 9; // 👈 fixed
-  const filtered = filterPosts(q, tag);
+
+  // 2. 💡 ย้ายตรรกะการดึงข้อมูลและการแปลงมาไว้ตรงนี้
+    const rawContent = await sanity.fetch<ContentData[]>(qContentList); // 👈 await การดึงข้อมูล
+    
+    // 💡 3. กำหนด allPosts เป็นตัวแปรภายใน (Local Variable)
+    const allPosts: Post[] = rawContent
+        .filter(p => p.banner) 
+        .map((p) => ({
+            slug: p.slug,
+            title: p.title,
+            excerpt: p.fulldesc, 
+            tag: p.tag,
+            cover: urlFor(p.banner!).url(), 
+            date : p.date,
+        }));
+    
+    // 4. เรียกใช้ filterPosts โดยส่ง allPosts เข้าไป
+
+  const filtered = filterPosts(q, tag, allPosts); 
+  //const filtered = filterPosts(q, tag);
   const total = filtered.length;
   const start = (page - 1) * pageSize;
   const slice = filtered.slice(start, start + pageSize);
 
+  //const tags = Array.from(new Set(allPosts.map(p => p.tag).filter(Boolean))) as string[];
   const tags = Array.from(new Set(allPosts.map(p => p.tag).filter(Boolean))) as string[];
 
   return (
