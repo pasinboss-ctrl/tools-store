@@ -40,13 +40,13 @@ const allPosts: Post[] = [
 ];
 */
 
-type ContentData= {
-  id:number ; 
+type ContentData = {
+  id: number; 
   title: string; 
   "slug": string; 
   tag: string;
   desc: string;
-  fulldesc : string;
+  fulldesc: string;
   banner?: SanityImage;
   date: string;
 };
@@ -61,68 +61,79 @@ type Post = {
     date: string;
 }
 
+// -------------------------------------------------------------------
+// ✅ 1. ฟังก์ชันดึงข้อมูล
+// -------------------------------------------------------------------
 async function getAllPosts(): Promise<Post[]> {
     const rawContent = await sanity.fetch<ContentData[]>(qContentList);
     
     const allPosts: Post[] = rawContent
-      .filter(p => p.banner) 
-      .map((p) => ({
-      slug: p.slug,
-      title: p.title,
-      desc: p.desc,
-      excerpt: p.fulldesc, // ใช้ fulldesc เป็น excerpt ใน Post
-      tag: p.tag,
-      cover: urlFor(p.banner!).url(), 
-      date : p.date,
-      }));
+        .filter(p => p.banner) 
+        .map((p) => ({
+            slug: p.slug,
+            title: p.title,
+            desc: p.desc,
+            excerpt: p.fulldesc, 
+            tag: p.tag,
+            cover: urlFor(p.banner!).url(), 
+            date : p.date,
+        }));
     return allPosts;
 }
 
+
+// -------------------------------------------------------------------
+// ✅ 2. generateStaticParams 
+// -------------------------------------------------------------------
 export async function generateStaticParams() {
-  const allPosts = await getAllPosts(); 
-   return allPosts.map(p => ({ slug: p.slug }));
+    const allPosts = await getAllPosts(); 
+    return allPosts.map(p => ({ slug: p.slug }));
 }
 
 
+// -------------------------------------------------------------------
+// ✅ 3. generateMetadata 
+// -------------------------------------------------------------------
 export async function generateMetadata({
- params,
+  params,
 }: {
- // Type ของ params ใน generateMetadata ไม่เป็น Promise
- params: { slug: string };
+  // ต้องเป็น Promise 
+  params: Promise<{ slug: string }>; 
 }) {
-  // 💡 FIX: แม้จะกำหนด Type ว่าไม่ใช่ Promise แต่ใน Next.js V15+
-  // params ใน generateMetadata มักถูกส่งมาเป็น Promise เราจึงต้อง await
   const resolvedParams = await params;
-  const { slug } = resolvedParams;
- 
- const allPosts = await getAllPosts(); 
- const p = allPosts.find(x => x.slug === slug);
- 
- return {
-  title: p ? `${p.title} | บทความ` : "บทความ",
-  description: p?.excerpt ?? "บทความและคู่มืออุปกรณ์ช่าง",
-  openGraph: p ? { images: [p.cover] } : undefined,
- };
+  const { slug } = resolvedParams;              
+  
+  const allPosts = await getAllPosts(); 
+  const p = allPosts.find(x => x.slug === slug);
+  
+  return {
+    title: p ? `${p.title} | บทความ` : "บทความ",
+    description: p?.excerpt ?? "บทความและคู่มืออุปกรณ์ช่าง",
+    openGraph: p ? { images: [p.cover] } : undefined,
+  };
 }
 
 
-// กำหนด Type ของ Argument ที่สมบูรณ์
+// -------------------------------------------------------------------
+// ✅ 4. BlogDetail Component (FINAL TYPE FIX)
+// -------------------------------------------------------------------
+// 💡 FIX: กำหนด params และ searchParams เป็น Promise ทั้งคู่
 type BlogDetailProps = {
-    // ✅ 1. params ต้องเป็น Promise เพื่อผ่าน Build (เพราะ Component เป็น async)
     params: Promise<{ slug: string }>; 
-    
-    // ✅ 2. searchParams เป็น Object ธรรมดา (Next.js Resolve ให้แล้ว)
-    searchParams: { [key: string]: string | string[] | undefined };
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
-export default async function BlogDetail({ params }: BlogDetailProps) {
-
- const resolvedParams = await params;
- const { slug } = resolvedParams; 
- 
+export default async function BlogDetail(props: BlogDetailProps) {
+  const { params } = props; // ดึงแค่ params ที่ต้องการใช้
+  // Await ทั้ง params และ searchParams ก่อนใช้งาน
+  const resolvedParams = await params;
+  // const resolvedSearchParams = await searchParams; // searchParams ไม่ถูกใช้ แต่ถ้าใช้ก็ต้อง await
+  const { slug } = resolvedParams;                 
+  
   const allPosts = await getAllPosts(); 
   const p = allPosts.find(x => x.slug === slug);
   if (!p) return notFound();
+
 
   // mock เนื้อหา (ภายหลังค่อยดึงจาก CMS/MDX)
   /*
