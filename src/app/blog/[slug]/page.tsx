@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 //import type { Metadata } from "next";
-import type { Post } from "@/components/PostCard";
+//import type { Post } from "@/components/PostCard";
 import { sanity } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image"; 
 import type { Image as SanityImage } from "sanity"; 
@@ -51,46 +51,73 @@ type ContentData= {
   date: string;
 };
 
-const rawContent = await sanity.fetch<ContentData[]>(qContentList);
-
-const allPosts: Post[] = rawContent
-    .filter(p => p.banner) // กรองเฉพาะรายการที่มีรูปภาพ
-    .map((p) => ({
-        slug: p.slug,
-        title: p.title,
-        // Assumption: PostCard component uses 'excerpt' for the short description, 
-        // so we map 'fulldesc' (หรือ p.desc หากคุณต้องการข้อความสั้น) ไปยัง 'excerpt'
-        desc:p.desc,
-        excerpt: p.fulldesc, 
-        tag: p.tag,
-        cover: urlFor(p.banner!).url(), 
-        date : p.date,
-        // 👇 เพิ่ม property 'read' เข้าไป เพื่อให้ตรงตาม Post type
-        //read: "3 นาที", // ใช้ค่า default หรือหาทางคำนวณเวลาอ่านจริง
-    }));
-
-export function generateStaticParams() {
-  return allPosts.map(p => ({ slug: p.slug }));
+type Post = {
+    slug: string;
+    title: string;
+    desc: string;
+    excerpt: string; 
+    tag: string;
+    cover: string; 
+    date: string;
 }
+
+async function getAllPosts(): Promise<Post[]> {
+    const rawContent = await sanity.fetch<ContentData[]>(qContentList);
+    
+    const allPosts: Post[] = rawContent
+      .filter(p => p.banner) 
+      .map((p) => ({
+      slug: p.slug,
+      title: p.title,
+      desc: p.desc,
+      excerpt: p.fulldesc, // ใช้ fulldesc เป็น excerpt ใน Post
+      tag: p.tag,
+      cover: urlFor(p.banner!).url(), 
+      date : p.date,
+      }));
+    return allPosts;
+}
+
+export async function generateStaticParams() {
+  const allPosts = await getAllPosts(); 
+   return allPosts.map(p => ({ slug: p.slug }));
+}
+
 
 export async function generateMetadata({
-  params,
+ params,
 }: {
-  params: { slug: string };
+ // Type ของ params ใน generateMetadata ไม่เป็น Promise
+ params: { slug: string };
 }) {
-  const { slug } = params;              
-  const p = allPosts.find(x => x.slug === slug);
-  return {
-    title: p ? `${p.title} | บทความ` : "บทความ",
-    description: p?.excerpt ?? "บทความและคู่มืออุปกรณ์ช่าง",
-    openGraph: p ? { images: [p.cover] } : undefined,
-  };
+  // 💡 FIX: แม้จะกำหนด Type ว่าไม่ใช่ Promise แต่ใน Next.js V15+
+  // params ใน generateMetadata มักถูกส่งมาเป็น Promise เราจึงต้อง await
+  const resolvedParams =  params;
+  const { slug } = resolvedParams;
+ 
+ const allPosts = await getAllPosts(); 
+ const p = allPosts.find(x => x.slug === slug);
+ 
+ return {
+  title: p ? `${p.title} | บทความ` : "บทความ",
+  description: p?.excerpt ?? "บทความและคู่มืออุปกรณ์ช่าง",
+  openGraph: p ? { images: [p.cover] } : undefined,
+ };
 }
 
-export default async function BlogDetail(
-   params: { slug: string }
-) {
-  const { slug } = params;                 // ✅ รอ params ก่อน
+
+// กำหนด Type ของ Argument ที่สมบูรณ์
+type BlogDetailProps = {
+    params: { slug: string };
+    searchParams: { [key: string]: string | string[] | undefined };
+};
+
+export default async function BlogDetail({ params }: BlogDetailProps) {
+
+ const resolvedParams = await params;
+ const { slug } = resolvedParams; 
+ 
+  const allPosts = await getAllPosts(); 
   const p = allPosts.find(x => x.slug === slug);
   if (!p) return notFound();
 
@@ -146,7 +173,7 @@ export default async function BlogDetail(
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
               </div>
               <div className="p-3">
-                <div className="text-xs text-gray-400">{new Date(r.date).toLocaleDateString("th-TH")} · {r.read}</div>
+                <div className="text-xs text-gray-400">{new Date(r.date).toLocaleDateString("th-TH")} </div>
                 <div className="font-semibold text-white group-hover:text-orange-300 line-clamp-2">{r.title}</div>
               </div>
             </Link>
