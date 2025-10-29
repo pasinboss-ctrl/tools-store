@@ -92,7 +92,7 @@ export async function generateMetadata({
 }) {
   // 💡 FIX: แม้จะกำหนด Type ว่าไม่ใช่ Promise แต่ใน Next.js V15+
   // params ใน generateMetadata มักถูกส่งมาเป็น Promise เราจึงต้อง await
-  const resolvedParams =  params;
+  const resolvedParams = await params;
   const { slug } = resolvedParams;
  
  const allPosts = await getAllPosts(); 
@@ -108,8 +108,11 @@ export async function generateMetadata({
 
 // กำหนด Type ของ Argument ที่สมบูรณ์
 type BlogDetailProps = {
-    params: { slug: string };
-    searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+    // ✅ 1. params ต้องเป็น Promise เพื่อผ่าน Build (เพราะ Component เป็น async)
+    params: Promise<{ slug: string }>; 
+    
+    // ✅ 2. searchParams เป็น Object ธรรมดา (Next.js Resolve ให้แล้ว)
+    searchParams: { [key: string]: string | string[] | undefined };
 };
 
 export default async function BlogDetail({ params }: BlogDetailProps) {
