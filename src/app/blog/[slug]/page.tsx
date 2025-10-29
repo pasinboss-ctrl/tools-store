@@ -109,7 +109,7 @@ export async function generateMetadata({
 // กำหนด Type ของ Argument ที่สมบูรณ์
 type BlogDetailProps = {
     params: { slug: string };
-    searchParams: { [key: string]: string | string[] | undefined };
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 };
 
 export default async function BlogDetail({ params }: BlogDetailProps) {
