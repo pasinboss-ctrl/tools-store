@@ -79,7 +79,8 @@ function filterPosts(q: string, tag: string, posts: Post[]): Post[] { // 👈 �
 export default async function BlogIndex({ 
     searchParams 
 }: { 
-    searchParams: { [key: string]: string | string[] | undefined } | Promise<{ [key: string]: string | string[] | undefined }> // Type อาจจะเป็น Promise ใน Next.js 15
+    //searchParams: { [key: string]: string | string[] | undefined } | Promise<{ [key: string]: string | string[] | undefined }> // Type อาจจะเป็น Promise ใน Next.js 15
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
     // ต้อง await ก่อนเพื่อเข้าถึงข้อมูลภายใน
     const resolvedSearchParams = await searchParams; // <--- **บรรทัดสำคัญ**
