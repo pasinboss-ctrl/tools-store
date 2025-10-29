@@ -34,7 +34,7 @@ type RawPromoData = {
   banner?: SanityImage;
 };
 
-const rawPromos = await sanity.fetch<RawPromoData[]>(qPromoList);
+//const rawPromos = await sanity.fetch<RawPromoData[]>(qPromoList);
 
 // 3. เปลี่ยน Type สำหรับข้อมูลที่พร้อมใช้งาน
 type ProcessedPromo = {
@@ -42,9 +42,10 @@ type ProcessedPromo = {
     title: string;
     desc: string;
     content: string;
-    imageUrl: string; // ✅ Field นี้เป็น URL string แล้ว
+    imageUrl: string; 
 };
-const promoData: ProcessedPromo[] = rawPromos
+
+/*const promoData: ProcessedPromo[] = rawPromos
     // ... (Map logic)
     .map((p) => ({
         slug: p.slug,
@@ -53,9 +54,57 @@ const promoData: ProcessedPromo[] = rawPromos
         content: p.fulldesc, // 💡 ตรวจสอบ: ถ้าไม่มี fulldesc ใน query จะเกิด error
         imageUrl: urlFor(p.banner!).url(), 
     }));
+*/
+// 💡 FIX 1: ย้ายการดึงข้อมูลทั้งหมดไปไว้ในฟังก์ชัน async เพื่อเลี่ยง Top-Level await
+async function getPromoData(): Promise<ProcessedPromo[]> {
+    const rawPromos = await sanity.fetch<RawPromoData[]>(qPromoList);
+    
+    return rawPromos
+    .filter(p => p.banner) // กรองเฉพาะรายการที่มี banner
+    .map((p) => ({
+    slug: p.slug,
+    title: p.title,
+    desc: p.desc,
+    content: p.fulldesc, 
+    imageUrl: urlFor(p.banner!).url(), 
+  }));
+}
+// ----------- Static Params ----------- //
+export async function generateStaticParams() {
+    const promoData = await getPromoData(); // ดึงข้อมูลภายในฟังก์ชัน
+    return promoData.map(p => ({ slug: p.slug }));
+}
 
+// ----------- Metadata (SEO) ----------- //
+export async function generateMetadata({
+ params,
+}: {
+ // ✅ FIX 2: params ต้องเป็น Promise เพื่อผ่าน Type Check ใน generateMetadata
+ params: Promise<{ slug: string }>;
+}) {
+  const resolvedParams = await params; // ✅ Await params
+  const { slug } = resolvedParams;
 
-export default async function PromoDetail(
+  const promoData = await getPromoData();
+  const p = promoData.find(item => item.slug === slug);
+
+  const title = p ? `${p.title} | โปรโมชั่น` : "โปรโมชั่น";
+  const description = p?.desc ?? "รายละเอียดโปรโมชั่นและข่าวสารล่าสุด";
+
+ return {
+ title,
+ description,
+    openGraph: {
+        images: p ? [{ url: p.imageUrl }] : [],
+    } };
+}
+
+type PromoDetailProps = {
+    params: Promise<{ slug: string }>;
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
+/*export default async function PromoDetail(
   { params }: { params: { slug: string } } // 💡 Note: params ไม่ใช่ Promise
 ) {
   // 1. รับ slug ออกมาจาก params (ไม่ต้อง await params)
@@ -65,7 +114,17 @@ export default async function PromoDetail(
   const p = promoData.find(item => item.slug === slug); 
   
   if (!p) return notFound();
+*/
+export default async function PromoDetail(props: PromoDetailProps) {
+  const { params } = props; // ดึง params ออกมา
 
+  const resolvedParams = await params; // ✅ FIX 3: Await params
+  const { slug } = resolvedParams;
+
+  const promoData = await getPromoData(); // ✅ FIX 4: ดึงข้อมูลภายใน component
+  const p = promoData.find(item => item.slug === slug); 
+
+  if (!p) return notFound();
   return (
     <main className="bg-black text-white min-h-screen">
       <section className="mx-auto max-w-5xl px-4 py-10">
