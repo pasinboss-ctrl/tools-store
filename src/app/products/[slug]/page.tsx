@@ -32,9 +32,9 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }) {
-  const { slug } = await params;
+  const { slug } = params;
   const p: ProductDetail | null = await sanity.fetch(qProductBySlug, { slug });
 
   const title = p ? `${p.title} | สินค้า` : "สินค้า";
@@ -57,9 +57,9 @@ export async function generateMetadata({
 export default async function ProductDetailPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }) {
-  const { slug } = await params;
+  const { slug } =  params;
 
   const p: ProductDetail | null = await sanity.fetch(qProductBySlug, { slug });
   if (!p) return notFound();

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import type { Metadata } from "next";
+//import type { Metadata } from "next";
 import type { Post } from "@/components/PostCard";
 import { sanity } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image"; 
@@ -73,10 +73,12 @@ export function generateStaticParams() {
   return allPosts.map(p => ({ slug: p.slug }));
 }
 
-export async function generateMetadata(
-  { params }: { params: Promise<{ slug: string }> }
-): Promise<Metadata> {
-  const { slug } = await params;                 // ✅ รอ params ก่อน
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const { slug } = params;              
   const p = allPosts.find(x => x.slug === slug);
   return {
     title: p ? `${p.title} | บทความ` : "บทความ",
@@ -86,9 +88,9 @@ export async function generateMetadata(
 }
 
 export default async function BlogDetail(
-  { params }: { params: Promise<{ slug: string }> }
+   params: { slug: string }
 ) {
-  const { slug } = await params;                 // ✅ รอ params ก่อน
+  const { slug } = params;                 // ✅ รอ params ก่อน
   const p = allPosts.find(x => x.slug === slug);
   if (!p) return notFound();
 
