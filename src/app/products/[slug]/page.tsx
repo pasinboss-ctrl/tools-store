@@ -21,6 +21,12 @@ type ProductDetail = {
   images?: SanityImage[];
 };
 
+type ProductPageProps = {
+    // ✅ FIX 1: params ต้องเป็น Promise เพื่อผ่าน Type Check ใน async component
+    params: Promise<{ slug: string }>;
+    // ✅ FIX 2: searchParams ต้องเป็น Promise ด้วย แม้ไม่ได้ใช้ (เพื่อความชัวร์ในการ Build)
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}
 // ----------- Static Params ----------- //
 export async function generateStaticParams() {
   const slugs: { slug: string }[] = await sanity.fetch(qProductSlugs);
@@ -32,9 +38,12 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const { slug } = params;
+  //const { slug } = params;
+  //const p: ProductDetail | null = await sanity.fetch(qProductBySlug, { slug });
+  const resolvedParams = await params; // ✅ FIX 4: await ก่อน Destructure
+  const { slug } = resolvedParams;
   const p: ProductDetail | null = await sanity.fetch(qProductBySlug, { slug });
 
   const title = p ? `${p.title} | สินค้า` : "สินค้า";
@@ -54,12 +63,11 @@ export async function generateMetadata({
 }
 
 // ----------- Page ----------- //
-export default async function ProductDetailPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const { slug } =  params;
+export default async function ProductDetailPage(props: ProductPageProps) { //  ใช้ ProductPageProps เป็น Type
+  const { params } = props; // ดึงแค่ params ออกมาเพื่อเลี่ยง Warning 'searchParams' is defined but never used
+    
+  const resolvedParams = await params; // ✅ FIX 5: await ก่อน Destructure
+  const { slug } = resolvedParams;
 
   const p: ProductDetail | null = await sanity.fetch(qProductBySlug, { slug });
   if (!p) return notFound();
