@@ -1,11 +1,13 @@
+
 //import Image from "next/image";
 import { notFound } from "next/navigation";
 import { sanity } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import { qProductBySlug, qProductSlugs } from "@/sanity/lib/queries";
 import type { Image as SanityImage } from "sanity";
-import Link from "next/link"; 
+//import Link from "next/link"; 
 import ProductGallery from "@/components/ProductGallery";
+import BackButtonLink from "@/components/BackButtonLink";
 
 export const revalidate = 60; // ISR 1 นาที
 
@@ -64,10 +66,15 @@ export async function generateMetadata({
 
 // ----------- Page ----------- //
 export default async function ProductDetailPage(props: ProductPageProps) { //  ใช้ ProductPageProps เป็น Type
-  const { params } = props; // ดึงแค่ params ออกมาเพื่อเลี่ยง Warning 'searchParams' is defined but never used
+  //const { params } = props; 
+  const { params, searchParams } = props; // ดึงทั้ง params และ searchParams
     
   const resolvedParams = await params; // ✅ FIX 5: await ก่อน Destructure
   const { slug } = resolvedParams;
+  //get url
+  const resolvedSearchParams = await searchParams;
+  console.log (resolvedSearchParams)
+  const previousPage = resolvedSearchParams.page;
 
   const p: ProductDetail | null = await sanity.fetch(qProductBySlug, { slug });
   if (!p) return notFound();
@@ -115,12 +122,16 @@ export default async function ProductDetailPage(props: ProductPageProps) { //  �
               >
                 สอบถาม/สั่งซื้อผ่าน LINE
               </a>
-              <Link
+              
+              {/*<Link
                 href="/products"
                 className="inline-block rounded-xl border border-gray-700 px-5 py-3 hover:border-orange-500"
               >
                 ← กลับไปหน้าสินค้า
               </Link>
+              */}
+              <BackButtonLink previousPage={previousPage} />
+
             </div>
           </div>
         </div>

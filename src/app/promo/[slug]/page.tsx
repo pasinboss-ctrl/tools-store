@@ -4,6 +4,7 @@ import { qPromoList } from "@/sanity/lib/queries";
 import { sanity } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image"; 
 import type { Image as SanityImage } from "sanity"; 
+import Link from "next/link";
 
 /*const promoData = {
         lift: {
@@ -129,6 +130,11 @@ export default async function PromoDetail(props: PromoDetailProps) {
     <main className="bg-black text-white min-h-screen">
       <section className="mx-auto max-w-5xl px-4 py-10">
         <h1 className="text-3xl font-bold text-orange-400 mb-6">{p.title}</h1>
+        <nav className="text-sm text-gray-400">
+        <Link href="/" className="hover:text-white">หน้าแรก</Link> <span className="mx-1">/</span>
+        <Link href="/promo" className="hover:text-white">โปรโมชั่น</Link> <span className="mx-1">/</span>
+        <span className="text-gray-300">{p.title}</span>
+      </nav>
         <div className="relative mt-4 aspect-[12/10] rounded-2xl overflow-hidden bg-[#1f1f1f] border border-gray-800">
           <Image
             src={p.imageUrl}

@@ -113,7 +113,7 @@ export default function Header() {
             </div>
 
             <a
-              href="https://line.me/R/ti/p/@yourline"
+              href="https://line.me/R/ti/p/@highpro"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-6 inline-flex items-center rounded-xl bg-orange-600 px-5 py-3 font-semibold text-black hover:bg-orange-500"

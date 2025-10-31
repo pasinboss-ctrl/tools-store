@@ -7,7 +7,7 @@ export default function Contact(){
           <p className="mt-1">ติดต่อเรา หรือแวะหน้าร้านใกล้คุณ</p>
         </div>
         <div className="md:text-right space-x-3">
-          <a href="https://line.me/R/ti/p/@yourline" target="_blank"
+          <a href="https://line.me/R/ti/p/@highpro" target="_blank"
              className="inline-block rounded-xl bg-black text-orange-400 font-semibold px-5 py-3 border border-black hover:bg-gray-900">
             ทัก LINE
           </a>

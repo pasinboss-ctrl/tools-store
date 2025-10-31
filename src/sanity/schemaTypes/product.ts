@@ -27,5 +27,12 @@ export default defineType({
       ]},
     }),
     defineField({ name: "inStock", title: "มีสินค้าในสต็อกหรือไม่", type: "boolean", initialValue: true }),
+    defineField({
+    name: "titleRaw",
+    title: "Title (Raw)",
+    type: "string",
+    //hidden: true,
+    initialValue: ({ document }) => document?.title,
+    }),
   ],
 });

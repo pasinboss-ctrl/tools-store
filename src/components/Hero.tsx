@@ -20,7 +20,7 @@ export default function Hero() {
 const heroImg = isMobile ? "/hero/Banner-mobile.jpg" : "/hero/Banner.jpg";
 
   return (
-    <section className="relative h-[82vh] min-h-[540px] w-full overflow-hidden bg-black">
+    <section className="relative h-[60vh] min-h-[540px] w-full overflow-hidden bg-black">
       {/* BG image + Ken Burns */}
       <div className="absolute inset-0">
         <motion.div

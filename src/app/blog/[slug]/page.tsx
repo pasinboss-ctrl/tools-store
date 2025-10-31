@@ -76,7 +76,7 @@ async function getAllPosts(): Promise<Post[]> {
             excerpt: p.fulldesc, 
             tag: p.tag,
             cover: urlFor(p.banner!).url(), 
-            date : p.date,
+            date: p.date,
         }));
     return allPosts;
 }
@@ -156,8 +156,12 @@ export default async function BlogDetail(props: BlogDetailProps) {
 
       <h1 className="mt-3 text-2xl md:text-3xl font-extrabold">{p.title}</h1>
       <div className="mt-1 text-sm text-gray-400">
-        {new Date(p.date).toLocaleDateString("th-TH")} 
-        {p.tag ? <> · <span className="px-2 py-0.5 rounded bg-orange-500/20 text-orange-400 border border-orange-500/30">{p.tag}</span></> : null}
+       {/* {new Date(p.date).toLocaleDateString("th-TH", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        })} */}
+        {p.tag ? <>  <span className="px-2 py-0.5 rounded bg-orange-500/20 text-orange-400 border border-orange-500/30">{p.tag}</span></> : null}
       </div>
 
       <div className="relative mt-4 aspect-[16/10] rounded-2xl overflow-hidden bg-[#1f1f1f] border border-gray-800">
@@ -171,7 +175,7 @@ export default async function BlogDetail(props: BlogDetailProps) {
       </article>
 
       <div className="mt-8 flex gap-3">
-        <a href="https://line.me/R/ti/p/@yourline" target="_blank"
+        <a href="https://line.me/R/ti/p/@highpro" target="_blank"
            className="rounded-xl bg-orange-600 text-black font-semibold px-5 py-3 hover:bg-orange-500">สอบถามผ่าน LINE</a>
         <Link href="/products" className="rounded-xl border border-orange-400 text-orange-400 px-5 py-3 hover:bg-black/60">ดูสินค้าเกี่ยวข้อง</Link>
       </div>

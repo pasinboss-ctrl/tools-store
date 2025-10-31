@@ -38,13 +38,13 @@ const contactLinks = [
   },
   {
     name: 'Shopee Store',
-    url: 'https://www.shopee.co.th/hp6224',
+    url: 'https://shopee.co.th/shop/1607113892',
     icon: FaShoppingCart,
     color: 'text-orange-500', // สีส้มของ Shopee
   },
   {
     name: 'LAZADA Store',
-    url: 'https://s.lazada.co.th/s.Al6Gm',
+    url: 'https://www.lazada.co.th/shop/hightools',
     icon: FaStore,
     color: 'text-blue-700', // สีน้ำเงินของ Lazada
   },
@@ -73,7 +73,7 @@ export default function ContactPage() {
 
           <div className="mt-6">
             <a
-              href="https://line.me/R/ti/p/@yourline"
+              href="https://line.me/R/ti/p/@highpro"
               target="_blank"
               className="inline-block rounded-xl bg-orange-600 text-black font-semibold px-5 py-3 hover:bg-orange-500"
             >
@@ -102,18 +102,22 @@ export default function ContactPage() {
           </p>
           {/* ตัวอย่างฟอร์มแบบพื้นฐาน: POST ไปยัง Formspree (เปลี่ยนเป็นของคุณ) */}
           <form
-            action="https://formspree.io/f/yourFormId"
+            action="https://formsubmit.co/youremail@example.com"
             method="POST"
             className="mt-4 grid grid-cols-1 gap-3"
-          >
-            <input name="name" required placeholder="ชื่อ*" className="rounded-xl bg-black/40 border border-gray-800 px-3 py-2 outline-none focus:border-orange-500" />
-            <input name="phone" placeholder="เบอร์โทร" className="rounded-xl bg-black/40 border border-gray-800 px-3 py-2 outline-none focus:border-orange-500" />
-            <input type="email" name="email" placeholder="อีเมล" className="rounded-xl bg-black/40 border border-gray-800 px-3 py-2 outline-none focus:border-orange-500" />
-            <textarea name="message" required rows={4} placeholder="ข้อความ*" className="rounded-xl bg-black/40 border border-gray-800 px-3 py-2 outline-none focus:border-orange-500" />
+            >
+            <input type="hidden" name="_subject" value="มีข้อความใหม่จากเว็บไซต์" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_next" value="https://yourdomain.com/thank-you" />
+
+            <input name="name" required placeholder="ชื่อ*" className="rounded-xl bg-black/40 border border-gray-800 px-3 py-2" />
+            <input name="phone" placeholder="เบอร์โทร" className="rounded-xl bg-black/40 border border-gray-800 px-3 py-2" />
+            <input type="email" name="email" placeholder="อีเมล" className="rounded-xl bg-black/40 border border-gray-800 px-3 py-2" />
+            <textarea name="message" required rows={4} placeholder="ข้อความ*" className="rounded-xl bg-black/40 border border-gray-800 px-3 py-2" />
             <button className="rounded-xl bg-orange-600 text-black font-semibold px-5 py-3 hover:bg-orange-500" type="submit">
-              ส่งข้อความ
+            ส่งข้อความ
             </button>
-          </form>
+        </form>
 
           {/* หรือ mailto แบบเร็ว (สำรอง) */}
           <div className="mt-3 text-sm text-gray-400">
@@ -177,7 +181,7 @@ export default function ContactPage() {
         <div className="mt-3 divide-y divide-gray-800 rounded-2xl border border-gray-800">
           {[
             { q: "มีบริการติดตั้งหรือไม่?", a: "มีครับ เรามีทีมงานพร้อมติดตั้งและสอนการใช้งาน" },
-            { q: "รับประกันกี่ปี?", a: "ส่วนใหญ่ 1 ปี (ขึ้นกับรุ่น) พร้อมบริการหลังการขาย" },
+            { q: "รับประกันกี่ปี?", a: "ขึ้นอยู่กับรุ่นนั้นๆตามเงื่อนไขของบริษัทกำหนด" },
             { q: "ชำระเงินช่องทางใดได้บ้าง?", a: "โอนชำระ/ใบกำกับภาษี/เงื่อนไขเครดิตสำหรับนิติบุคคล" },
           ].map((f) => (
             <details key={f.q} className="group">

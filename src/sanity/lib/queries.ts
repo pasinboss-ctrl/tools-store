@@ -29,18 +29,20 @@ export const qProductSlugs = /* groq */ `
 export const qProductsList = /* groq */ `
 {
   "items": *[_type == "product"
-    && ($useCat == false || category == $cat)
-    && ($useQ == false || title match $qQuery)
-  ]|order(_createdAt desc)[$start...$end]{ title, "slug": slug.current, price, category, thumbnail },
-  "total": count(*[_type == "product"
-    && ($useCat == false || category == $cat)
-    && ($useQ == false || title match $qQuery)
-  ]),
-
+  && ($useCat == false || category == $cat)
+]|order(_createdAt desc){
+  title,
+  "slug": slug.current,
+  price,
+  category,
+  thumbnail,
+  titleRaw
+},
   "categories": array::unique(*[_type == "product"].category)
 }
 `;
-
+//    && ($useQ == false || lower(titleRaw) match lower($qQuery))
+//    && ($useQ == false || title match $qQuery)
 export const qPromoList = 
 `
   *[_type == "promo"]|order(_createdAt desc){

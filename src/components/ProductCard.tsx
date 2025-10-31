@@ -11,11 +11,28 @@ export type Product = {
   category: string;
 };
 
+type ProductCardProps = {
+    p: Product;
+    // currentPage
+    currentPage?: string | string[] | undefined; 
+};
 
-export default function ProductCard({ p }: { p: Product }) {
+export default function ProductCard({ p, currentPage }: ProductCardProps) {
+  
+    // จัดการค่า currentPage ให้อยู่ในรูปแบบ string (ป้องกัน string[] หรือ undefined)
+    const pageValue = currentPage 
+        ? (Array.isArray(currentPage) ? currentPage[0] : currentPage)
+        : null;
+        
+    // 4. สร้าง Query String
+    const pageQueryString = pageValue ? `?page=${pageValue}` : '';
+
+    // 5. สร้างลิงก์แบบมี Query String
+    const productLink = `/products/${p.slug}${pageQueryString}`;
+
   return (
     <div className="group rounded-2xl bg-[#1f1f1f] border border-gray-800 hover:border-orange-500 transition overflow-hidden">
-      <Link href={`/products/${p.slug}`}>
+      <Link href={productLink}>
         <div className="relative aspect-square">
           <Image src={p.img} alt={p.name} fill className="object-contain p-4" sizes="(min-width:1024px) 25vw, 50vw" />
           {p.badge && (
