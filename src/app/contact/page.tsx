@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 
 const contactLinks = [
   {
-    name: 'Facebook HIGH PRO',
+    name: 'Facebook',
     url: 'https://www.facebook.com/highprotools',
     icon: FaFacebookSquare,
     color: 'text-blue-500', // สีฟ้าของ Facebook
@@ -102,7 +102,7 @@ export default function ContactPage() {
           </p>
           {/* ตัวอย่างฟอร์มแบบพื้นฐาน: POST ไปยัง Formspree (เปลี่ยนเป็นของคุณ) */}
           <form
-            action="https://formsubmit.co/youremail@example.com"
+            action="https://formsubmit.co/highproequipment@gmail.com"
             method="POST"
             className="mt-4 grid grid-cols-1 gap-3"
             >
