@@ -53,7 +53,7 @@ export default defineType({
       // ควบคุมรูปแบบการแสดงผลใน Studio (ใช้ Moment format options)
       dateFormat: 'YYYY-MM-DD',
       timeFormat: 'HH:mm',
-      timeStep: 15, // ขั้นของนาทีที่เลือกได้
+      timeStep: 10, // ขั้นของนาทีที่เลือกได้
       allowTimeZoneSwitch: true, // อนุญาตให้ผู้ใช้เปลี่ยน Timezone ใน Studio
       }
     }),
@@ -65,7 +65,7 @@ export default defineType({
       // ควบคุมรูปแบบการแสดงผลใน Studio (ใช้ Moment format options)
       dateFormat: 'YYYY-MM-DD',
       timeFormat: 'HH:mm',
-      timeStep: 15, // ขั้นของนาทีที่เลือกได้
+      timeStep: 10, // ขั้นของนาทีที่เลือกได้
       allowTimeZoneSwitch: true, // อนุญาตให้ผู้ใช้เปลี่ยน Timezone ใน Studio
       }  
     }),
