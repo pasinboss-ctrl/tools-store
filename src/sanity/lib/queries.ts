@@ -1,10 +1,11 @@
 export const qProducts = /* groq */ `
-*[_type == "product"]|order(_createdAt desc){
+*[_type == "product" && isActive == true]|order(_createdAt desc){
   title,
   "slug": slug.current,
   price,
   inStock,
   thumbnail,
+  isActive,
 }
 `;
 
@@ -16,7 +17,8 @@ export const qProductBySlug = /* groq */ `
   inStock,
   description,
   thumbnail,
-  images
+  images,
+  isActive,
 }
 `;
 
@@ -36,7 +38,8 @@ export const qProductsList = /* groq */ `
   price,
   category,
   thumbnail,
-  titleRaw
+  titleRaw,
+  inStock,
 },
   "categories": array::unique(*[_type == "product"].category)
 }
@@ -45,18 +48,21 @@ export const qProductsList = /* groq */ `
 //    && ($useQ == false || title match $qQuery)
 export const qPromoList = 
 `
-  *[_type == "promo"]|order(_createdAt desc){
+  *[_type == "promo" && isActive == true && startsAt <= now() && endsAt >= now()]|order(_startsAt desc){
   title,
   "slug": slug.current,
   banner,
   desc,
   fulldesc,
+  startsAt,
+  endsAt,
+  isActive,
 }
 `;
 
 export const qContentList = 
 `
-  *[_type == "news"]|order(_createdAt desc){
+  *[_type == "news" && isActive == true && startsAt <= now() && endsAt >= now()]|order(_startsAt desc){
   title,
   "slug": slug.current,
   banner,
@@ -64,5 +70,7 @@ export const qContentList =
   fulldesc,
   tag,
   startsAt,
+  endsAt,
+  isActive,
 }
 `;

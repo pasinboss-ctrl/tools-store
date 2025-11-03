@@ -49,11 +49,25 @@ export default defineType({
       name: "startsAt",
       title: "เริ่ม",
       type: "datetime",
+      options: {
+      // ควบคุมรูปแบบการแสดงผลใน Studio (ใช้ Moment format options)
+      dateFormat: 'YYYY-MM-DD',
+      timeFormat: 'HH:mm',
+      timeStep: 15, // ขั้นของนาทีที่เลือกได้
+      allowTimeZoneSwitch: true, // อนุญาตให้ผู้ใช้เปลี่ยน Timezone ใน Studio
+      }
     }),
     defineField({
       name: "endsAt",
       title: "สิ้นสุด",
       type: "datetime",
+      options: {
+      // ควบคุมรูปแบบการแสดงผลใน Studio (ใช้ Moment format options)
+      dateFormat: 'YYYY-MM-DD',
+      timeFormat: 'HH:mm',
+      timeStep: 15, // ขั้นของนาทีที่เลือกได้
+      allowTimeZoneSwitch: true, // อนุญาตให้ผู้ใช้เปลี่ยน Timezone ใน Studio
+      }  
     }),
     defineField({
       name: "isActive",

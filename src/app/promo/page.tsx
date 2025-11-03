@@ -5,6 +5,8 @@ import { sanity } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image"; 
 import type { Image as SanityImage } from "sanity"; 
 
+export const revalidate = 60;
+
 // 1. กำหนด Type ของข้อมูลที่ Fetch มา
 type PromoData = {
     _id: string; // ใช้ _id แทน id ที่อาจเป็น null/undefined

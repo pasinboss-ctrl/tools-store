@@ -23,7 +23,8 @@ export default defineType({
         { title: "เครื่องถ่วงยาง", value: "เครื่องถ่วงยาง" },
         { title: "ห้องพ่นสี", value: "ห้องพ่นสี" },
         { title: "อุปกรณ์ช่าง", value: "อุปกรณ์ช่าง" },
-        { title: "อุปกรณ์ซ่อมบำรุงช่วงล่าง", value: "อุปกรณ์ซ่อมบำรุงช่วงล่าง"}
+        { title: "อุปกรณ์ซ่อมบำรุงช่วงล่าง", value: "อุปกรณ์ซ่อมบำรุงช่วงล่าง"},
+        { title: "อื่นๆ", value: "อื่นๆ"},
       ]},
     }),
     defineField({ name: "inStock", title: "มีสินค้าในสต็อกหรือไม่", type: "boolean", initialValue: true }),

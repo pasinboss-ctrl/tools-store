@@ -16,7 +16,7 @@ export default function ContentStrip({ items }: { items: PostItem[] }) {
       <h2 className="text-xl md:text-2xl font-bold text-white">บทความล่าสุด</h2>
 
       <div className="grid md:grid-cols-3 gap-6 mt-4">
-        {items.map((p) => (
+        {items.slice(0, 3).map((p) => (  // แสดง 3 กล่องล่าสุด
           <Link
             key={p.slug}
             href={`/blog/${p.slug}`}

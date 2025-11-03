@@ -5,6 +5,8 @@ import { sanity } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image"; 
 import type { Image as SanityImage } from "sanity"; 
 
+export const revalidate = 60;
+
 type ContentData= {
   id:number ; 
   title: string; 

@@ -37,10 +37,13 @@ export default async function ProductsPage({
   console.log("GROQ params >>>", { qQuery, cat: catParam,useCat,useQ}); // ⬅️ ใช้ catParam
 
   const data: {
-    items: { title: string; slug: string; price?: number; category?: string; thumbnail?: Image }[];
+    items: { title: string; slug: string; price?: number; category?: string; thumbnail?: Image,inStock:boolean }[];
     total: number;
     categories: (string | null)[];
   } = await sanity.fetch(qProductsList, { qQuery, cat: catParam,useCat,useQ});
+
+  //console.log(data)
+
 
   let slice: Product[] = data.items.map((p) => ({
     slug: p.slug,
@@ -48,6 +51,7 @@ export default async function ProductsPage({
     price: p.price,
     category: p.category ?? "",
     img: p.thumbnail ? urlFor(p.thumbnail).width(850).height(1000).url() : "/placeholder.jpg",
+    active : p.inStock,
   }));
 
   // 1️⃣ กรองข้อมูล (ฝั่ง client)

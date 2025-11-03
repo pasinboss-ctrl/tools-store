@@ -8,17 +8,24 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Image from "next/image";
 import Link from "next/link";
+//import { format } from 'date-fns';
+//import { th } from 'date-fns/locale';
 //import type { Image } from "sanity";
+
 
 
 export type BrochureItem = {
   id: string | number;
   title: string;
   img: string;      // เส้นทางใน public เช่น "/brochures/promo1.webp"
-  href?: string;    // ลิงก์ไป PDF/หน้าโปรฯ
+  href?: string;    
   subtitle?: string;
   alt?: string;
+  start?: string;
+  end?: string;
+  active? : boolean;
 };
+
 
 export default function BrochureSlider({ items }: { items: BrochureItem[] }) {
   return (

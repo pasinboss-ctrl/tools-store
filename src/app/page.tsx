@@ -7,9 +7,9 @@ import { sanity } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import { qPromoList } from "@/sanity/lib/queries";
 import { qContentList } from "@/sanity/lib/queries";
-import type { Image } from "sanity";
+import { Image } from "sanity";
 
-
+export const revalidate = 60;
 
 //const brochures: BrochureItem[] = [
  // { id: 1, title: "ลิฟท์ยกรถ 2 เสา", img: "/Brochure/b1.jpg", href: "/promo/lift" },
@@ -46,8 +46,8 @@ console.log("GROQ qContentList >>>\n", qContentList);
 // items: { title: string; slug: string; img?: Image }[];
 //} = await sanity.fetch(qPromoList);
 
-const data = await sanity.fetch<{ id:number ; title: string; slug: string; banner?: Image }[]>(qPromoList);
-const content_data = await sanity.fetch<{ id:number ; title: string; slug: string; tag: string, banner?: Image }[]>(qContentList);
+const data = await sanity.fetch<{ id:number ; title: string; slug: string; banner?: Image,startsAt: string,endsAt: string,isActive: boolean}[]>(qPromoList);
+const content_data = await sanity.fetch<{ id:number ; title: string; slug: string; tag: string, banner?: Image,startsAt: string,endsAt: string,isActive: boolean}[]>(qContentList);
 
 const brochuresFromSanity: BrochureItem[] = data.map((p) => ({ 
   // 💡 โครงสร้างต้องตรงกับ BrochureItem
@@ -55,6 +55,9 @@ const brochuresFromSanity: BrochureItem[] = data.map((p) => ({
   title: p.title,
   href: `/promo/${p.slug}`, 
   img: p.banner ? urlFor(p.banner).url() : "",
+  startsAt : p.startsAt,
+  endsAt : p.endsAt,
+  isActive : p.isActive
 }));
 
 const contentFromSanity: PostItem[] = content_data.map((p) => ({ 
@@ -64,6 +67,9 @@ const contentFromSanity: PostItem[] = content_data.map((p) => ({
   href: p.slug, 
   tag : p.tag,
   img: p.banner ? urlFor(p.banner).url() : "",
+  startsAt : p.startsAt,
+  endsAt : p.endsAt,
+  isActive : p.isActive
 }));
 
 

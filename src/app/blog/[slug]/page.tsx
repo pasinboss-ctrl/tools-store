@@ -8,6 +8,8 @@ import { urlFor } from "@/sanity/lib/image";
 import type { Image as SanityImage } from "sanity"; 
 import { qContentList } from "@/sanity/lib/queries";
 
+export const revalidate = 60;
+
 /*
 const allPosts: Post[] = [
   {
@@ -143,7 +145,7 @@ export default async function BlogDetail(props: BlogDetailProps) {
     "คำนึงถึงเสียงรบกวน, การบำรุงรักษา และพื้นที่ติดตั้ง โดยเฉพาะระบบระบายความร้อนและการระบายน้ำ",
   ];
   */
-  const articleContent = p.excerpt;
+  //const articleContent = p.excerpt;
   const related = allPosts.filter(x => x.slug !== p.slug).slice(0, 2);
 
   return (
@@ -168,11 +170,15 @@ export default async function BlogDetail(props: BlogDetailProps) {
         <Image src={p.cover} alt={p.title} fill className="object-cover" priority />
       </div>
 
-      <article className="prose prose-invert prose-emerald mt-6 max-w-none">
-       <div 
-                 dangerouslySetInnerHTML={{ __html: articleContent }} 
-             />
-      </article>
+      
+        {p.excerpt && (
+        <div className="mt-4 text-gray-300 space-y-3">
+        {p.excerpt.split("\n").map((line, i) => (
+        <p key={i}>{line}</p>
+        ))}
+        </div>
+        )}
+
 
       <div className="mt-8 flex gap-3">
         <a href="https://line.me/R/ti/p/@highpro" target="_blank"

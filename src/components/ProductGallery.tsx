@@ -23,8 +23,8 @@ export default function ProductGallery({ images }: { images: string[] }) {
 
       {/* แถว thumbnails (สูงสุด 3 รูป) */}
       <div className="mt-3 grid grid-cols-3 gap-3">
-        {pics.slice(0, 3).map((src, i) => (
-          <button
+        {pics.slice(0, 6).map((src, i) => ( // เพิ่มเป็น 6 รูป
+          <button  
             key={i}
             type="button"
             onClick={() => setCurrent(i)}

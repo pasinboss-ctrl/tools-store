@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
+export const revalidate = 60;
+
 export type Product = {
   slug: string;
   name: string;
@@ -9,6 +11,7 @@ export type Product = {
   images?: string[];   // ← เพิ่มอาร์เรย์รูปย่อย/รูปทั้งหมด (รวมรูปหลักด้วยก็ได้)
   badge?: string;
   category: string;
+  active : boolean;
 };
 
 type ProductCardProps = {
@@ -40,15 +43,28 @@ export default function ProductCard({ p, currentPage }: ProductCardProps) {
               {p.badge}
             </span>
           )}
+          {/* วงกลมสีแดง "สินค้าหมด" ถ้า isActive เป็น false */}
+          {!p.active && (
+            <div className="absolute inset-0 flex items-center justify-center"> {/* Overlay สีดำจางๆ */}
+              <span className="w-20 h-20 rounded-full bg-orange-500 text-white font-bold flex items-center justify-center text-sm">
+                สินค้าหมด
+              </span>
+            </div>
+          )}
         </div>
         <div className="p-4">
           <div className="text-white font-semibold line-clamp-2 h-14">
             {p.name}
           </div>
           <div className="mt-1 text-sm text-gray-400">{p.category}</div>
-          <div className="mt-2 text-orange-400 font-bold">
-            {p.price ? `฿${p.price.toLocaleString()}` : "ติดต่อสอบถามราคา"}
+          <div className="mt-2 font-bold">
+          <div className="mt-2 font-bold">
+            {/* กำหนดคลาสสีตามค่าของ p.active */}
+            <div className={p.active ? "text-orange-400" : "text-red-600"}>
+              {p.active ? "มีสินค้า" : "สินค้าหมด"}
+            </div>
           </div>
+</div>
         </div>
       </Link>
 
@@ -58,7 +74,7 @@ export default function ProductCard({ p, currentPage }: ProductCardProps) {
           target="_blank"
           className="inline-flex items-center justify-center w-full rounded-xl border border-orange-500 text-orange-400 px-3 py-2 hover:bg-orange-500 hover:text-black transition"
         >
-          ทัก LINE สอบถาม
+          ติดต่อสอบถาม
         </a>
       </div>
     </div>
