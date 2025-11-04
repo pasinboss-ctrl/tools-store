@@ -48,7 +48,7 @@ export const qProductsList = /* groq */ `
 //    && ($useQ == false || title match $qQuery)
 export const qPromoList = 
 `
-  *[_type == "promo" && isActive == true && startsAt <= now() && endsAt >= now()]|order(_startsAt desc){
+  *[_type == "promo" && isActive == true && startsAt <= now() && endsAt >= now()]|order(startsAt desc){
   title,
   "slug": slug.current,
   banner,
@@ -62,7 +62,7 @@ export const qPromoList =
 
 export const qContentList = 
 `
-  *[_type == "news" && isActive == true && startsAt <= now() && endsAt >= now()]|order(_startsAt desc){
+  *[_type == "news" && isActive == true && startsAt <= now() && endsAt >= now()]|order(startsAt desc){
   title,
   "slug": slug.current,
   banner,

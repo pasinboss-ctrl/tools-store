@@ -3,8 +3,8 @@ export default function Contact(){
     <section className="mx-auto max-w-7xl px-4 py-12">
       <div className="rounded-2xl grid md:grid-cols-2 gap-6 p-6 bg-gradient-to-r from-orange-600 to-orange-500 text-black">
         <div>
-          <h3 className="text-2xl font-extrabold">พร้อมให้คำปรึกษาเลือกอุปกรณ์ช่าง</h3>
-          <p className="mt-1">ติดต่อเรา หรือแวะหน้าร้านใกล้คุณ</p>
+          <h3 className="text-2xl font-extrabold">พร้อมให้คำปรึกษา แนะนำ เครื่องมือและอุปกรณ์ช่างยนต์โดยทีมช่างผู้เชี่ยวชาญ</h3>
+          <p className="mt-1">ติดต่อเรา หรือแวะชมสินค้าที่หน้าร้านใกล้คุณ</p>
         </div>
         <div className="md:text-right space-x-3">
           <a href="https://line.me/R/ti/p/@highpro" target="_blank"

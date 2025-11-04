@@ -6,7 +6,11 @@ export default function Footer() {
         <div className="mx-auto max-w-7xl px-4 py-8 grid md:grid-cols-3 gap-8 text-sm">
           <div>
             <div className="font-semibold">High Pro Equipment Co.,Ltd.</div>
-            <div className="text-slate-500 mt-1">ผู้จัดจำหน่ายเครื่องมือช่างยนต์ครบวงจร ไม่ว่าจะเป็น ลิฟท์ยกรถยนต์ ลิฟท์มอเตอร์ไซค์ เครื่องถอดยาง เครื่องถ่วงล้อ เครื่องตั้งศูนย์ล้อ ไปจนถึงอุปกรณ์สำหรับอู่ซ่อมสีและตัวถัง</div>
+            <div className="text-slate-500 mt-1">ผู้จัดจำหน่ายเครื่องมือและอุปกรณ์ช่างยนต์
+            ครอบคลุมทุกความต้องการของอู่ซ่อมรถ 
+            ลิฟท์ยกรถยนต์, ลิฟท์มอเตอร์ไซค์, เครื่องถอดยาง, เครื่องถ่วงล้อ, เครื่องตั้งศูนย์ล้อ
+            ไปจนถึง อุปกรณ์สำหรับอู่ซ่อมสีและตัวถัง ครบ จบ ในที่เดียว
+            </div>
           </div>
           <div>
             <div className="font-semibold">ติดต่อ</div>

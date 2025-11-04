@@ -26,7 +26,9 @@ export default function AboutPage() {
         <div className="relative px-6 py-16 text-center">
           <h1 className="text-3xl md:text-4xl font-extrabold">High Pro Tools</h1>
           <p className="mt-3 text-gray-200 max-w-2xl mx-auto">
-            ผู้จัดจำหน่ายเครื่องมือช่างยนต์ครบวงจร ไม่ว่าจะเป็น ลิฟท์ยกรถยนต์ ลิฟท์มอเตอร์ไซค์ เครื่องถอดยาง เครื่องถ่วงล้อ เครื่องตั้งศูนย์ล้อ ไปจนถึงอุปกรณ์สำหรับอู่ซ่อมสีและตัวถัง
+            ครบเครื่องเรื่องเครื่องมือช่างยนต์ ตั้งแต่ ลิฟท์ยกรถ, เครื่องถอด–ถ่วงยาง, เครื่องตั้งศูนย์ 
+            ไปจนถึง อุปกรณ์อู่ซ่อมสีและตัวถัง
+            ที่เดียวครบ จบทุกงานช่าง
           </p>
           <div className="mt-6">
             <Link href="/products" className="rounded-xl bg-orange-600 text-black font-semibold px-6 py-3 hover:bg-orange-500">
@@ -51,10 +53,11 @@ export default function AboutPage() {
         <div className="rounded-2xl bg-[#1f1f1f] border border-gray-800 p-6">
           <h2 className="text-xl font-bold">เป้าหมายของเรา</h2>
           <p className="mt-2 text-gray-300">
-            เราพร้อมให้คำปรึกษาทั้ง อู่ขนาดเล็กจนถึงอู่ขนาดใหญ่ โดยทีมช่างผู้เชี่ยวชาญที่มีประสบการณ์จริงในวงการเครื่องมือช่างยนต์ พร้อมบริการ จัดส่งและติดตั้งทั่วประเทศ
+            เราพร้อมให้คำปรึกษาทั้ง อู่ขนาดเล็กจนถึงอู่ขนาดใหญ่ โดยทีมช่างผู้เชี่ยวชาญที่มี
+            ประสบการณ์จริงในวงการเครื่องมือช่างยนต์ พร้อมบริการ จัดส่งและติดตั้งทั่วประเทศ
           </p>
           <ul className="mt-4 space-y-2 text-gray-300">
-            <p>มั่นใจในคุณภาพทุกชิ้น ด้วย มาตรฐานการผลิตระดับสากล และรับประกันสินค้านานกว่า 1 ปี
+            <p>มั่นใจในคุณภาพทุกชิ้น ด้วยมาตรฐานการผลิตระดับสากล และรับประกันสินค้ามากกว่า 1 ปี
             เพราะเรามุ่งมั่นที่จะเป็น พาร์ทเนอร์ที่ดีที่สุดสำหรับทุกอู่ซ่อมรถยนต์ในประเทศไทย
             </p>
           </ul>
@@ -67,9 +70,9 @@ export default function AboutPage() {
       {/* Timeline / Why us */}
       <section className="mt-10 grid md:grid-cols-3 gap-6">
         {[
-          { t: "เชี่ยวชาญจริง", d: "ทีมงานภาคสนามและช่างเทคนิคพร้อมแนะนำการใช้งานจริง" },
-          { t: "ของแท้ มีประกัน", d: "รับประกันสินค้า พร้อมบริการหลังการขาย และอะไหล่" },
-          { t: "คุ้มค่า", d: "สเปกเหมาะสมกับงาน ลดต้นทุนระยะยาว" },
+          { t: "ติดตั้งโดยทีมช่างผู้เชี่ยวชาญ", d: "ทีมช่างเทคนิคและภาคสนามของเรา พร้อมให้คำแนะนำและสาธิตการใช้งานจริง เพื่อให้คุณมั่นใจในทุกขั้นตอน" },
+          { t: "มีคุณภาพ ได้มาตรฐาน พร้อมรับประกันคุณภาพ", d: "มั่นใจด้วยบริการหลังการขายอะไหล่พร้อมใช้ ดูแลโดยทีมช่างผู้เชี่ยวชาญจาก HIGH PRO" },
+          { t: "คุ้มค่าทุกการลงทุน", d: "สเปกครบ ตอบโจทย์งานช่าง ลดต้นทุนได้ในระยะยาว" },
         ].map((b) => (
           <div key={b.t} className="rounded-2xl bg-[#1f1f1f] border border-gray-800 p-6">
             <div className="text-lg font-semibold">{b.t}</div>
@@ -81,8 +84,8 @@ export default function AboutPage() {
       {/* CTA */}
       <section className="mt-10 rounded-2xl border border-orange-500/40 bg-gradient-to-r from-orange-600 to-orange-500 p-6 text-black flex flex-col md:flex-row items-center justify-between gap-4">
         <div>
-          <div className="text-xl font-extrabold">อยากเริ่มต้นจัดอุปกรณ์อู่ให้ครบ?</div>
-          <div>ส่งรายการ หรือคุยกับผู้เชี่ยวชาญได้เลย</div>
+          <div className="text-xl font-extrabold">อยากเริ่มต้นธุรกิจอู่ซ่อมรถใช่ไหม?</div>
+          <div>ให้ทีมงาน High Pro แนะนำ จัดชุดเซ็ทและสเปคเครื่องมือที่เหมาะกับการใช้งานของคุณที่สุด</div>
         </div>
         <div className="flex gap-3">
           <a href="https://line.me/R/ti/p/@highpro" target="_blank" className="rounded-xl bg-black text-orange-400 px-5 py-3 font-semibold hover:bg-gray-900">
