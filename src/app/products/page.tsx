@@ -7,7 +7,7 @@ import ProductCard, { Product } from "@/components/ProductCard";
 import type { Image } from "sanity";
 import FilterBar from "@/components/FilterBar";
 
-export const revalidate = 60;
+export const revalidate = 30;
 
 export default async function ProductsPage({
   searchParams,

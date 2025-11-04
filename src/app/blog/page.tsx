@@ -4,8 +4,9 @@ import { qContentList } from "@/sanity/lib/queries";
 import { sanity } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image"; 
 import type { Image as SanityImage } from "sanity"; 
+import FilterBarBlog from "@/components/FilterBarBlog";
 
-export const revalidate = 60;
+export const revalidate = 30;
 
 type ContentData= {
   id:number ; 
@@ -127,11 +128,15 @@ export default async function BlogIndex({
   const tags = Array.from(new Set(allPosts.map(p => p.tag).filter(Boolean))) as string[];
 
   return (
-    <main className="mx-auto max-w-7xl px-4 py-10 text-white">
-      <h1 className="text-2xl md:text-3xl font-bold">บทความ</h1>
-
+    <main className="mx-auto max-w-7xl px-4 py-10 text-white"> 
     
-      <form className="mt-4 grid gap-3 md:grid-cols-3">
+      <h1 className="text-2xl md:text-3xl font-bold">
+              {q ? `ผลการค้นหา: ${q}` : "บทความ"}
+            </h1>
+      
+            <FilterBarBlog tags={tags} defaultTag={tag} defaultQ={q} />
+      
+      {/*<form className="mt-4 grid gap-3 md:grid-cols-3">
         <input
           name="q"
           defaultValue={q}
@@ -149,7 +154,7 @@ export default async function BlogIndex({
         <button className="rounded-xl bg-orange-600 text-black font-semibold px-4 py-2 hover:bg-orange-500" type="submit">
           ค้นหา
         </button>
-      </form>
+      </form>*/}
 
       {/* Grid */}
       <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">

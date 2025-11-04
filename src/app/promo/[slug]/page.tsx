@@ -6,7 +6,7 @@ import { urlFor } from "@/sanity/lib/image";
 import type { Image as SanityImage } from "sanity"; 
 import Link from "next/link";
 
-export const revalidate = 60;
+export const revalidate = 30;
 
 /*const promoData = {
         lift: {

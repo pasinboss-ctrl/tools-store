@@ -28,7 +28,7 @@ export default function PostCard({ p }: { p: Post }) {
       </div>
       <div className="p-4">
         <div className="text-xs text-gray-400">
-          {new Date(p.date).toLocaleDateString("th-TH")} · {p.read ?? "บทความ"}
+          {p.read ?? "บทความ"}
         </div>
         <h3 className="mt-1 font-semibold text-white leading-snug group-hover:text-orange-300 transition line-clamp-2">
           {p.title}

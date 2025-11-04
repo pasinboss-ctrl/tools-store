@@ -8,7 +8,7 @@ import { urlFor } from "@/sanity/lib/image";
 import type { Image as SanityImage } from "sanity"; 
 import { qContentList } from "@/sanity/lib/queries";
 
-export const revalidate = 60;
+export const revalidate = 30;
 
 /*
 const allPosts: Post[] = [
