@@ -9,7 +9,7 @@ import type { Image as SanityImage } from "sanity";
 import ProductGallery from "@/components/ProductGallery";
 import BackButtonLink from "@/components/BackButtonLink";
 
-export const revalidate = 30; // ISR 1 นาที
+export const revalidate = 15; // ISR 1 นาที
 
 // ----------- Types ----------- //
 type ProductDetail = {

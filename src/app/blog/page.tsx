@@ -6,7 +6,7 @@ import { urlFor } from "@/sanity/lib/image";
 import type { Image as SanityImage } from "sanity"; 
 import FilterBarBlog from "@/components/FilterBarBlog";
 
-export const revalidate = 30;
+export const revalidate = 15;
 
 type ContentData= {
   id:number ; 
@@ -129,7 +129,7 @@ export default async function BlogIndex({
 
   return (
     <main className="mx-auto max-w-7xl px-4 py-10 text-white"> 
-    
+
       <h1 className="text-2xl md:text-3xl font-bold">
               {q ? `ผลการค้นหา: ${q}` : "บทความ"}
             </h1>

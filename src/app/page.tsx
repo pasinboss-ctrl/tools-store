@@ -9,7 +9,7 @@ import { qPromoList } from "@/sanity/lib/queries";
 import { qContentList } from "@/sanity/lib/queries";
 import { Image } from "sanity";
 
-export const revalidate = 30;
+export const revalidate = 15;
 
 //const brochures: BrochureItem[] = [
  // { id: 1, title: "ลิฟท์ยกรถ 2 เสา", img: "/Brochure/b1.jpg", href: "/promo/lift" },
