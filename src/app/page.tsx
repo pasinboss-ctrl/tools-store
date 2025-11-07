@@ -8,6 +8,7 @@ import { urlFor } from "@/sanity/lib/image";
 import { qPromoList } from "@/sanity/lib/queries";
 import { qContentList } from "@/sanity/lib/queries";
 import { Image } from "sanity";
+import ViewCounter from "@/components/ViewCounter";
 
 export const revalidate = 15;
 
@@ -81,6 +82,7 @@ export default async function Home(){
     <main className="bg-black text-white">
    
       <Hero />
+      {/* 💡 ตำแหน่งที่คุณต้องการให้แสดง counter */}
         <section className="mx-auto max-w-7xl px-4 mt-8">
           <h2 className="text-xl md:text-2xl font-bold">โปรโมชัน / โบรชัวร์</h2>
           <div className="mt-3">

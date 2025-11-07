@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import ViewCounter from './ViewCounter';
 
 export default function Footer() {
     return (
@@ -41,7 +42,7 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-        <div className="text-center text-xs text-slate-500 py-4">© 2025 High Pro Equipment Co.,Ltd.</div>
+        <div className="text-center text-xs text-slate-500 py-4">© 2025 High Pro Equipment Co.,Ltd. <ViewCounter /></div>
       </footer>
     );
   }
